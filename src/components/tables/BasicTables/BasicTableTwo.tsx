@@ -6,7 +6,7 @@ import {
   TableRow,
 } from "../../ui/table";
 
-import Badge from "../../ui/badge/Badge";
+// import Badge from "../../ui/badge/Badge";
 
 interface ProductType {
   id: number;
