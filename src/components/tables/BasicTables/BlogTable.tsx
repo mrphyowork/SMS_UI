@@ -1,3 +1,4 @@
+import { PencilIcon, TrashBinIcon } from "../../../icons";
 import {
   Table,
   TableBody,
@@ -62,29 +63,29 @@ export default function BasicTableTwo() {
       <div className="max-w-full overflow-x-auto">
         <Table>
           {/* Table Header */}
-          <TableHeader className="border-b border-gray-100 text-center dark:border-white/[0.05]">
+          <TableHeader className="border-b  border-gray-100 text-2xl text-center dark:border-white/[0.05]">
             <TableRow>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                className="px-5 py-3 text-gray-500 text-theme-sm dark:text-gray-400"
               >
                 ID
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                className="px-5 py-3  text-gray-500 text-theme-sm dark:text-gray-400"
               >
                 Title
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500  text-theme-xs dark:text-gray-400"
+                className="px-5 py-3 text-gray-500  text-theme-sm dark:text-gray-400"
               >
                 Content
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500  text-theme-xs dark:text-gray-400"
+                className="px-5 py-3  text-gray-500  text-theme-sm dark:text-gray-400"
               >
                 Action
               </TableCell>
@@ -106,34 +107,16 @@ export default function BasicTableTwo() {
                 </TableCell>
                 <TableCell className="px-5 py-4 sm:px-6 text-start">
                   {/* {order.action} */}
-                  <button
-                    style={{
-                      backgroundColor: "#0A6FFD",
-                      color: "white",
-                      border: "1px solid #0A6FFD",
-                      borderRadius: "4px",
-                      padding: "5px 10px",
-                      marginRight: "5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleEdit(order.id)}
-                  >
-                    Edit
-                  </button>{" "}
-                  <button
-                    style={{
-                      backgroundColor: "#DC3444",
-                      color: "white",
-                      border: "1px solid #DC3444",
-                      borderRadius: "4px",
-                      padding: "5px 10px",
-                      marginRight: "5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleDelete(order.id)}
-                  >
-                    Delete
-                  </button>
+                  <div className="flex items-center justify-center gap-5">
+                    <PencilIcon
+                      className="text-blue-500 w-6 h-6 hover:scale-140 transition-all duration-500 cursor-pointer"
+                      onClick={() => handleEdit(order.id)}
+                    />
+                    <TrashBinIcon
+                      className="text-red-500 w-6 h-6 hover:scale-140 transition-all duration-400 cursor-pointer"
+                      onClick={() => handleDelete(order.id)}
+                    />
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
