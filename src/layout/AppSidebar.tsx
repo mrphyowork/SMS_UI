@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
     name: "Product Management",
     subItems: [
       { name: "Product", path: "/products", pro: false },
-      { name: "Blog", path: "/blogs", pro: false },
+      // { name: "Blog", path: "/blogs", pro: false },
     ],
   },
   {
@@ -50,7 +50,11 @@ const navItems: NavItem[] = [
   {
     name: "Tables",
     icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    subItems: [
+      { name: "Basic Tables", path: "/basic-tables", pro: false },
+      { name: "Products", path: "/products", pro: false },
+      { name: "Blogs", path: "/blogs", pro: false },
+    ],
   },
   // {
   //   name: "Pages",
