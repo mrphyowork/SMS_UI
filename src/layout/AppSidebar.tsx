@@ -27,11 +27,11 @@ const navItems: NavItem[] = [
       // { name: "Blog", path: "/blogs", pro: false },
     ],
   },
-  {
-    icon: <GridIcon />,
-    name: "Blog",
-    subItems: [{ name: "Blog", path: "/blogs", pro: false }],
-  },
+  // {
+  //   icon: <GridIcon />,
+  //   name: "Blog",
+  //   subItems: [{ name: "Blog", path: "/blogs", pro: false }],
+  // },
   // {
   //   icon: <CalenderIcon />,
   //   name: "Calendar",
