@@ -121,10 +121,10 @@ export default function Blogs() {
       header: "Action",
       render: (blog: Blog) => (
         <div className="col-span-1 flex items-center justify-center gap-2">
-          <button className="btn" onClick={() => handleEdit(blog.id)}>
+          <button className="btn" onClick={() => handleEdit()}>
             <PencilIcon className="size-5" />
           </button>
-          <button className="btn" onClick={() => handleDelete(blog.id)}>
+          <button className="btn" onClick={() => handleDelete()}>
             <TrashBinIcon className="size-5" />
           </button>
         </div>
@@ -154,24 +154,16 @@ export default function Blogs() {
     // call API
   };
 
-  const handleEdit = (id: number) => {
+  const handleEdit = () => {
     // show edit modal
     editModal.openModal();
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = () => {
     // show delete confirm modal
     deleteModal.openModal();
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // input change handle
-    const { name, value } = e.target;
-    console.log(name, value);
-  };
-  const saveData = () => {
-    console.log("save Data");
-  };
   return (
     <>
       <PageMeta title="Blogs" description="This is Blog Listing" />
