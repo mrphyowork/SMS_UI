@@ -174,11 +174,12 @@ export default function Blogs() {
     setData((prev) => [...prev, blog]);
   };
 
-  const handleUpdateBlog = (id: number, updatedData: { title: string; content: string }) => {
-    setData((prev) => 
-      prev.map((blog) => 
-        blog.id === id ? { ...blog, ...updatedData } : blog
-      )
+  const handleUpdateBlog = (
+    id: number,
+    updatedData: { title: string; content: string }
+  ) => {
+    setData((prev) =>
+      prev.map((blog) => (blog.id === id ? { ...blog, ...updatedData } : blog))
     );
   };
 
@@ -191,10 +192,10 @@ export default function Blogs() {
       <PageMeta title="Blogs" description="This is Blog Listing" />
       <PageBreadcrumb
         pageTitle="Blog"
-        links={[
-          { name: "Blog", path: "/blog" },
-          { name: "Listing", path: "/blog" },
-        ]}
+        // links={[
+        //   { name: "Blog", path: "/blog" },
+        //   { name: "Listing", path: "/blog" },
+        // ]}
       />
       <div className="flex justify-end mb-5">
         <Button
@@ -222,10 +223,18 @@ export default function Blogs() {
       <CreateForm createModal={createModal} onSave={handleCreateBlog} />
 
       {/* edit blog */}
-      <EditForm editModal={editModal} blog={selectedBlog} onUpdate={handleUpdateBlog} />
+      <EditForm
+        editModal={editModal}
+        blog={selectedBlog}
+        onUpdate={handleUpdateBlog}
+      />
 
       {/* delete blog */}
-      <DeleteForm deleteModal={deleteModal} blog={selectedBlog} onDelete={handleDeleteBlog} />
+      <DeleteForm
+        deleteModal={deleteModal}
+        blog={selectedBlog}
+        onDelete={handleDeleteBlog}
+      />
     </>
   );
 }

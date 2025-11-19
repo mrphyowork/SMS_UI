@@ -1,16 +1,16 @@
 import { Link } from "react-router";
 
-interface BreadcrumbLink {
-  name: string;
-  path: string;
-}
+// interface BreadcrumbLink {
+//   name: string;
+//   path: string;
+// }
 
 interface BreadcrumbProps {
   pageTitle: string;
-  links: BreadcrumbLink[];
+  // links: BreadcrumbLink[];
 }
 
-const PageBreadCrumb: React.FC<BreadcrumbProps> = ({ pageTitle }) => {
+const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ pageTitle }) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
       <h2
@@ -54,4 +54,4 @@ const PageBreadCrumb: React.FC<BreadcrumbProps> = ({ pageTitle }) => {
   );
 };
 
-export default PageBreadCrumb;
+export default PageBreadcrumb;

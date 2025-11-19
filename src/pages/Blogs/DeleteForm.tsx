@@ -60,7 +60,11 @@ export default function DeleteForm({
             >
               No
             </Button>
-            <Button size="sm" variant="destructive" onClick={handleDelete}>
+            <Button
+              size="sm"
+              // variant="destructive"
+              onClick={handleDelete}
+            >
               Yes, Delete
             </Button>
           </div>
