@@ -28,11 +28,6 @@ const navItems: NavItem[] = [
     ],
   },
   // {
-  //   icon: <GridIcon />,
-  //   name: "Blog",
-  //   subItems: [{ name: "Blog", path: "/blogs", pro: false }],
-  // },
-  // {
   //   icon: <CalenderIcon />,
   //   name: "Calendar",
   //   path: "/calendar",
@@ -52,8 +47,8 @@ const navItems: NavItem[] = [
     icon: <TableIcon />,
     subItems: [
       { name: "Basic Tables", path: "/basic-tables", pro: false },
-      { name: "Products", path: "/products", pro: false },
-      { name: "Blogs", path: "/blogs", pro: false },
+      // { name: "Products", path: "/products", pro: false },
+      { name: "Blog", path: "/blogs", pro: false },
     ],
   },
   // {
