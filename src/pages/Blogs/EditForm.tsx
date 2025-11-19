@@ -1,24 +1,55 @@
+import React, { useState, useEffect } from "react";
 import Input from "../../components/form/input/InputField";
 import Label from "../../components/form/Label";
 import Button from "../../components/ui/button/Button";
 import { Modal } from "../../components/ui/modal";
 import { useModal } from "../../hooks/useModal";
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  // input change handle
-  const { name, value } = e.target;
-  console.log(name, value);
-};
+interface Blog {
+  id: number;
+  title: string;
+  content: string;
+}
 
-const saveData = () => {
-  console.log("save Data");
-};
+interface FormData {
+  title: string;
+  content: string;
+}
 
 export default function EditForm({
   editModal,
+  blog,
+  onUpdate,
 }: {
   editModal: ReturnType<typeof useModal>;
+  blog?: Blog;
+  onUpdate?: (id: number, data: FormData) => void;
 }) {
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    content: "",
+  });
+
+  useEffect(() => {
+    if (blog) {
+      setFormData({
+        title: blog.title,
+        content: blog.content,
+      });
+    }
+  }, [blog]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const saveData = () => {
+    if (formData.title.trim() && formData.content.trim() && blog) {
+      onUpdate?.(blog.id, formData);
+      editModal.closeModal();
+    }
+  };
   return (
     <>
       <Modal
@@ -40,6 +71,7 @@ export default function EditForm({
                   type="text"
                   placeholder="Enter Title"
                   name="title"
+                  value={formData.title}
                   onChange={handleInputChange}
                 />
               </div>
@@ -49,6 +81,7 @@ export default function EditForm({
                   type="text"
                   placeholder="Enter Content"
                   name="content"
+                  value={formData.content}
                   onChange={handleInputChange}
                 />
               </div>

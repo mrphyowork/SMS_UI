@@ -111,6 +111,7 @@ export default function Blogs() {
 
   // Data State
   const [data, setData] = useState<Blog[]>([]);
+  const [selectedBlog, setSelectedBlog] = useState<Blog | undefined>();
 
   const columns: Columns<Blog>[] = [
     { key: "id", header: "ID", render: (blog: Blog) => blog.id },
@@ -121,10 +122,10 @@ export default function Blogs() {
       header: "Action",
       render: (blog: Blog) => (
         <div className="col-span-1 flex items-center justify-center gap-2">
-          <button className="btn" onClick={() => handleEdit()}>
+          <button className="btn" onClick={() => handleEdit(blog)}>
             <PencilIcon className="size-5" />
           </button>
-          <button className="btn" onClick={() => handleDelete()}>
+          <button className="btn" onClick={() => handleDelete(blog)}>
             <TrashBinIcon className="size-5" />
           </button>
         </div>
@@ -142,7 +143,7 @@ export default function Blogs() {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   useEffect(() => {
     console.log("queryParams", queryParams);
@@ -154,14 +155,35 @@ export default function Blogs() {
     // call API
   };
 
-  const handleEdit = () => {
-    // show edit modal
+  const handleEdit = (blog: Blog) => {
+    setSelectedBlog(blog);
     editModal.openModal();
   };
 
-  const handleDelete = () => {
-    // show delete confirm modal
+  const handleDelete = (blog: Blog) => {
+    setSelectedBlog(blog);
     deleteModal.openModal();
+  };
+
+  const handleCreateBlog = (newBlog: { title: string; content: string }) => {
+    const maxId = data.length > 0 ? Math.max(...data.map((b) => b.id)) : 0;
+    const blog: Blog = {
+      id: maxId + 1,
+      ...newBlog,
+    };
+    setData((prev) => [...prev, blog]);
+  };
+
+  const handleUpdateBlog = (id: number, updatedData: { title: string; content: string }) => {
+    setData((prev) => 
+      prev.map((blog) => 
+        blog.id === id ? { ...blog, ...updatedData } : blog
+      )
+    );
+  };
+
+  const handleDeleteBlog = (id: number) => {
+    setData((prev) => prev.filter((blog) => blog.id !== id));
   };
 
   return (
@@ -197,13 +219,13 @@ export default function Blogs() {
       </div>
 
       {/* create blog */}
-      <CreateForm createModal={createModal} />
+      <CreateForm createModal={createModal} onSave={handleCreateBlog} />
 
       {/* edit blog */}
-      <EditForm editModal={editModal} />
+      <EditForm editModal={editModal} blog={selectedBlog} onUpdate={handleUpdateBlog} />
 
       {/* delete blog */}
-      <DeleteForm deleteModal={deleteModal} />
+      <DeleteForm deleteModal={deleteModal} blog={selectedBlog} onDelete={handleDeleteBlog} />
     </>
   );
 }

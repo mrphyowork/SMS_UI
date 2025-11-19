@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../components/form/input/InputField";
 import Label from "../../components/form/Label";
 import Button from "../../components/ui/button/Button";
 import { useModal } from "../../hooks/useModal";
 import { Modal } from "../../components/ui/modal";
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  // input change handle
-  const { name, value } = e.target;
-  console.log(name, value);
-};
-
-const saveData = () => {
-  console.log("save Data");
-};
+interface FormData {
+  title: string;
+  content: string;
+}
 
 export default function CreateForm({
   createModal,
+  onSave,
 }: {
   createModal: ReturnType<typeof useModal>;
+  onSave?: (data: FormData) => void;
 }) {
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    content: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const saveData = () => {
+    if (formData.title.trim() && formData.content.trim()) {
+      onSave?.(formData);
+      setFormData({ title: "", content: "" });
+      createModal.closeModal();
+    }
+  };
   return (
     <>
       <Modal
@@ -41,6 +55,7 @@ export default function CreateForm({
                   type="text"
                   placeholder="Enter Title"
                   name="title"
+                  value={formData.title}
                   onChange={handleInputChange}
                 />
               </div>
@@ -50,6 +65,7 @@ export default function CreateForm({
                   type="text"
                   placeholder="Enter Content"
                   name="content"
+                  value={formData.content}
                   onChange={handleInputChange}
                 />
               </div>
